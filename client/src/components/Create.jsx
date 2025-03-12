@@ -6,15 +6,15 @@ import { publicClient, getWalletClient, chainConfig } from '../config'
 import { wagmiAbi } from '../abi'
 import { usePrivy } from '@privy-io/react-auth'
 import { createWalletClient ,custom } from 'viem'
-// import { flowTestnet } from 'viem/chains'
+// import { FLOWTestnet } from 'viem/chains'
 import { parseGwei } from 'viem'
 import { createPublicClient , http } from 'viem'
 
 
-const flowTestnet = {
+const FLOWTestnet = {
   id: 545,
-  name: 'Flow Testnet',
-  network: 'flow-testnet',
+  name: 'FLOW Testnet',
+  network: 'FLOW-testnet',
   nativeCurrency: {
     decimals: 18,
     name: 'FLOW',
@@ -22,10 +22,10 @@ const flowTestnet = {
   },
   rpcUrls: {
     default: {
-      http: ['https://testnet.evm.nodes.onflow.org']
+      http: ['https://testnet.evm.nodes.onFLOW.org']
     },
     public: {
-      http: ['https://testnet.evm.nodes.onflow.org']
+      http: ['https://testnet.evm.nodes.onFLOW.org']
     }
   }
 }
@@ -59,17 +59,17 @@ function Create() {
 
       // Create public client
       const publicClient = createPublicClient({
-        chain: flowTestnet,
+        chain: FLOWTestnet,
         transport: http()
       })
 
       // Create wallet client
       const walletClient = createWalletClient({
-        chain: flowTestnet,
+        chain: FLOWTestnet,
         transport: custom(window.ethereum)
       })
 
-      // Switch to Flow Testnet
+      // Switch to FLOW Testnet
       try {
         await window.ethereum.request({
           method: 'wallet_switchEthereumChain',
@@ -81,14 +81,14 @@ function Create() {
             method: 'wallet_addEthereumChain',
             params: [{
               chainId: '0x221',
-              chainName: 'Flow Testnet',
+              chainName: 'FLOW Testnet',
               nativeCurrency: {
                 name: 'FLOW',
                 symbol: 'FLOW',
                 decimals: 18
               },
-              rpcUrls: ['https://testnet.evm.onflow.org'],
-              blockExplorerUrls: ['https://testnet.flowscan.org']
+              rpcUrls: ['https://testnet.evm.onFLOW.org'],
+              blockExplorerUrls: ['https://testnet.FLOWscan.org']
             }]
           })
         }
@@ -97,7 +97,7 @@ function Create() {
       // Get current chain ID to verify
       const chainId = await walletClient.getChainId()
       if (chainId !== 545) {
-        throw new Error('Please switch to Flow Testnet')
+        throw new Error('Please switch to FLOW Testnet')
       }
 
       // Prepare the contract write
@@ -140,7 +140,7 @@ function Create() {
             onClick={() => navigate('/')}
             className="text-3xl font-bold text-pink-600 cursor-pointer hover:text-pink-500 transition-colors mb-4"
           >
-            PrediFlow
+            PrediFlare
           </h1>
           <div className="bg-blue-500 rounded-2xl p-2">
             <ConnectButton />

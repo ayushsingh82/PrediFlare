@@ -66,7 +66,7 @@ function Eliza() {
               onClick={() => navigate('/')}
               className="text-3xl font-bold text-pink-600 cursor-pointer hover:text-pink-500 transition-colors"
             >
-              PrediFlow
+              PrediFlare
             </h1>
           </div>
           <ConnectButton />
@@ -75,7 +75,7 @@ function Eliza() {
       </div>
 
       {/* Chat Container */}
-      <div className="w-full max-w-xl mb-20 bg-pink-300 rounded-2xl border-2 border-pink-500 overflow-hidden">
+      <div className="w-full max-w-xl mb-20 bg-pink-300 rounded-2xl border-2 border-pink-500 overFLOW-hidden">
         {/* Chat Header */}
         <div className="bg-gradient-to-r from-pink-500 to-purple-500 p-4 flex items-center gap-3">
           <FaRobot className="text-white text-2xl" />
@@ -83,7 +83,7 @@ function Eliza() {
         </div>
 
         {/* Messages */}
-        <div className="h-[400px] overflow-y-auto p-4 space-y-4">
+        <div className="h-[400px] overFLOW-y-auto p-4 space-y-4">
           {messages.map((msg, idx) => (
             <div
               key={idx}

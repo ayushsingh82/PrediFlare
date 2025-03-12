@@ -13,11 +13,11 @@ function Home() {
             🚀 🎯 🎊
           </div>
           <h1 className="text-3xl md:text-3xl font-bold text-pink-600 mb-8">
-            PrediFlow
+            PrediFlare
           </h1>
           <p className="text-xl text-black mb-12">
             <span className=" px-4 py-2 rounded-lg text-sm font-bold">
-              Prediction market on Flow powered by eliza AI <br/> and polymarket insights.
+              Prediction market on Flare powered by eliza AI <br/> and polymarket insights.
             </span>
 
             <hr className='mt-[10px] mb-[10px] border-blue-500/30'/>

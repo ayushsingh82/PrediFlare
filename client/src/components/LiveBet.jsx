@@ -36,7 +36,7 @@ function LiveBet() {
     const fetchQuestions = async () => {
       try {
         const contractQuestions = await publicClient.readContract({
-          address: "0x5a8E771b5D0B3d2e4d218478CB7C9029d00c4e5a",
+          address: "0x5d407Ad498d93F3a7988C16Ec63835d760f816D5",
           abi: wagmiAbi,
           functionName: "getAllQuestions"
         });
@@ -144,7 +144,7 @@ function LiveBet() {
             onClick={() => navigate('/')}
             className="text-3xl font-bold text-pink-600 cursor-pointer hover:text-pink-500 transition-colors mb-4"
           >
-            PrediFlow
+            PrediFlare
           </h1>
           <div className="bg-blue-500 rounded-2xl p-2">
             <ConnectButton />
@@ -170,7 +170,7 @@ function LiveBet() {
             onDragEnd={handleDragEnd}
             className="w-full cursor-grab active:cursor-grabbing"
           >
-            <div className="bg-gradient-to-br from-pink-400 to-purple-500 rounded-2xl overflow-hidden shadow-xl">
+            <div className="bg-gradient-to-br from-pink-400 to-purple-500 rounded-2xl overFLOW-hidden shadow-xl">
               {/* Background Pattern */}
               <div className="absolute inset-0 opacity-10 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSIjZmZmIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxjaXJjbGUgY3g9IjIwIiBjeT0iMjAiIHI9IjIiLz48L2c+PC9zdmc+')]"></div>
 
@@ -252,7 +252,7 @@ function LiveBet() {
             </div>
 
             {/* Messages */}
-            <div className="h-[400px] overflow-y-auto p-4 space-y-4">
+            <div className="h-[400px] overFLOW-y-auto p-4 space-y-4">
               {messages.map((msg, idx) => (
                 <div
                   key={idx}

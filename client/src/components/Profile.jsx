@@ -15,7 +15,7 @@ function Profile() {
             onClick={() => navigate('/')}
             className="text-3xl font-bold text-pink-600 cursor-pointer hover:text-pink-500 transition-colors mb-4"
           >
-            PrediFlow
+            PrediFlare
           </h1>
           <div className="bg-blue-500 rounded-2xl p-2">
             <ConnectButton />
@@ -26,7 +26,7 @@ function Profile() {
 
       {/* Stats Boxes */}
       <div className="w-full max-w-3xl mb-8">
-        <div className="grid grid-cols-3 bg-pink-300 rounded-2xl overflow-hidden border-2 border-pink-500">
+        <div className="grid grid-cols-3 bg-pink-300 rounded-2xl overFLOW-hidden border-2 border-pink-500">
           <div className="p-4 text-center border-r border-pink-800/60">
             <h3 className="text-sm font-semibold text-black mb-1">Total Bets</h3>
             <p className="text-2xl font-bold text-black">8</p>
@@ -52,8 +52,8 @@ function Profile() {
             <div className="border-b border-pink-800/60 py-3">
               <div className="flex justify-between items-center">
                 <div>
-                  <p className="font-medium">Placed 0.5 FLOW</p>
-                  <p className="text-sm text-gray-700">"Will I win flow track"</p>
+                  <p className="font-medium">Placed 0.5 FLR</p>
+                  <p className="text-sm text-gray-700">"Will I win FLR track"</p>
                 </div>
                 <div className="text-right">
                   <p className="text-sm text-gray-700">2 hours ago</p>
@@ -65,8 +65,8 @@ function Profile() {
             <div className="border-b border-pink-800/60 py-3">
               <div className="flex justify-between items-center">
                 <div>
-                  <p className="font-medium">Placed 1.2 FLOW</p>
-                  <p className="text-sm text-gray-700">"Will FLOW become leading green chain"</p>
+                  <p className="font-medium">Placed 1.2 FLR</p>
+                  <p className="text-sm text-gray-700">"Will FLR become leading green chain"</p>
                 </div>
                 <div className="text-right">
                   <p className="text-sm text-gray-700">5 hours ago</p>

@@ -1,35 +1,35 @@
 import { createPublicClient, createWalletClient , http, custom } from 'viem'
 import { privateKeyToAccount } from 'viem/accounts'
-import { flowTestnet } from 'viem/chains'
+import { flowTestnet , flareTestnet} from 'viem/chains'
 
 // Custom Flow Testnet configuration
-export const flowTestnetTry = {
-  id: 545,
-  name: 'Flow Testnet',
-  network: 'flow-testnet',
+export const flareTestnetTry = {
+  id: 114,
+  name: 'Flare Testnet',
+  network: 'flare-testnet',
   nativeCurrency: {
     decimals: 18,
-    name: 'Flow',
-    symbol: 'FLOW',
+    name: 'FLR',
+    symbol: 'FLR',
   },
   rpcUrls: {
     default: {
-      http: ['https://testnet.evm.nodes.onflow.org'],
+      http: ['https://coston2-api.flare.network/ext/C/rpc'],
       
     },
     public: {
-      http: ['https://testnet.evm.nodes.onflow.org'],
+      http: ['https://coston2-api.flare.network/ext/C/rpc'],
     },
   },
   blockExplorers: {
-    default: { name: 'FlowScan', url: 'https://testnet.flowscan.org' },
+    default: { name: 'FlareScan', url: 'https://coston2-explorer.flare.network' },
   },
   testnet: true,
 }
 
 // Public client
 export const publicClient = createPublicClient({
-  chain: flowTestnet,
+  chain: flareTestnet,
   transport: http()
 })
 
@@ -53,15 +53,15 @@ export const getWalletClient = () => {
 
 // Chain configuration for wallet connection
 export const chainConfig = {
-  chainId: '0x221', // 545 in hex
-  chainName: 'Flow Testnet',
+  chainId: '0x72', // 545 in hex
+  chainName: 'Flare Testnet',
   nativeCurrency: {
-    name: 'Flow',
-    symbol: 'FLOW',
+    name: 'FLR',
+    symbol: 'FLR',
     decimals: 18
   },
-  rpcUrls: ['https://testnet.evm.nodes.onflow.org'],
-  blockExplorerUrls: ['https://testnet.flowscan.org']
+  rpcUrls: ['https://coston2-api.flare.network/ext/C/rpc'],
+  blockExplorerUrls: ['https://coston2-explorer.flare.network']
 }
 
 // JSON-RPC Account
@@ -69,5 +69,3 @@ export const chainConfig = {
 
 // Local Account
 export const account = privateKeyToAccount('0xdf57089febbacf7ba0bc227dafbffa9fc08a93fdc68e1e42411a14efcf23656e')
-
-
