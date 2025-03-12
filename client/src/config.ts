@@ -1,8 +1,8 @@
 import { createPublicClient, createWalletClient , http, custom } from 'viem'
 import { privateKeyToAccount } from 'viem/accounts'
-import { flowTestnet , flareTestnet} from 'viem/chains'
+import {  flareTestnet} from 'viem/chains'
 
-// Custom Flow Testnet configuration
+// Custom Flare Testnet configuration
 export const flareTestnetTry = {
   id: 114,
   name: 'Flare Testnet',
@@ -35,7 +35,7 @@ export const publicClient = createPublicClient({
 
 // Wallet client
 export const walletClient = createWalletClient({
-  chain: flowTestnet,
+  chain: flareTestnet,
   transport: custom(window.ethereum)
 })
 
@@ -43,7 +43,7 @@ export const walletClient = createWalletClient({
 export const getWalletClient = () => {
   if (typeof window !== 'undefined' && window.ethereum) {
     return createWalletClient({
-      chain: flowTestnet,
+      chain: flareTestnet,
       transport: custom(window.ethereum),
       account: window.ethereum.selectedAddress
     })

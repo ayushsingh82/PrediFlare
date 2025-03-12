@@ -6,26 +6,26 @@ import { publicClient, getWalletClient, chainConfig } from '../config'
 import { wagmiAbi } from '../abi'
 import { usePrivy } from '@privy-io/react-auth'
 import { createWalletClient ,custom } from 'viem'
-// import { FLOWTestnet } from 'viem/chains'
+
 import { parseGwei } from 'viem'
 import { createPublicClient , http } from 'viem'
 
 
-const FLOWTestnet = {
-  id: 545,
-  name: 'FLOW Testnet',
-  network: 'FLOW-testnet',
+const FlareTestnet = {
+  id: 114,
+  name: 'Flare Testnet',
+  network: 'Flare-testnet',
   nativeCurrency: {
     decimals: 18,
-    name: 'FLOW',
-    symbol: 'FLOW',
+    name: 'FLR',
+    symbol: 'FLR',
   },
   rpcUrls: {
     default: {
-      http: ['https://testnet.evm.nodes.onFLOW.org']
+      http: ['https://coston2-api.flare.network/ext/C/rpc']
     },
     public: {
-      http: ['https://testnet.evm.nodes.onFLOW.org']
+      http: ['https://coston2-explorer.flare.network']
     }
   }
 }
@@ -59,36 +59,36 @@ function Create() {
 
       // Create public client
       const publicClient = createPublicClient({
-        chain: FLOWTestnet,
+        chain:  FlareTestnet,
         transport: http()
       })
 
       // Create wallet client
       const walletClient = createWalletClient({
-        chain: FLOWTestnet,
+        chain: FlareTestnet,
         transport: custom(window.ethereum)
       })
 
-      // Switch to FLOW Testnet
+    
       try {
         await window.ethereum.request({
           method: 'wallet_switchEthereumChain',
-          params: [{ chainId: '0x221' }]
+          params: [{ chainId: '0x72' }]
         })
       } catch (switchError) {
         if (switchError.code === 4902) {
           await window.ethereum.request({
             method: 'wallet_addEthereumChain',
             params: [{
-              chainId: '0x221',
-              chainName: 'FLOW Testnet',
+              chainId: '0x72',
+              chainName: 'Flare Testnet',
               nativeCurrency: {
-                name: 'FLOW',
-                symbol: 'FLOW',
+                name: 'FLR',
+                symbol: 'flr',
                 decimals: 18
               },
-              rpcUrls: ['https://testnet.evm.onFLOW.org'],
-              blockExplorerUrls: ['https://testnet.FLOWscan.org']
+              rpcUrls: ['https://coston2-api.flare.network/ext/C/rpc'],
+              blockExplorerUrls: ['https://coston2-explorer.flare.network']
             }]
           })
         }
@@ -96,14 +96,14 @@ function Create() {
 
       // Get current chain ID to verify
       const chainId = await walletClient.getChainId()
-      if (chainId !== 545) {
-        throw new Error('Please switch to FLOW Testnet')
+      if (chainId !== 114) {
+        throw new Error('Please switch to Flare Testnet')
       }
 
       // Prepare the contract write
       const { request } = await publicClient.simulateContract({
         account: user.wallet.address,
-        address: '0x5a8E771b5D0B3d2e4d218478CB7C9029d00c4e5a',
+        address: '0x5d407Ad498d93F3a7988C16Ec63835d760f816D5',
         abi: wagmiAbi,
         functionName: 'submitQuestion',
         args: [question],

@@ -66,7 +66,7 @@ function Profile() {
               <div className="flex justify-between items-center">
                 <div>
                   <p className="font-medium">Placed 1.2 FLR</p>
-                  <p className="text-sm text-gray-700">"Will FLR become leading green chain"</p>
+                  <p className="text-sm text-gray-700">"Will FLR become leading  chain"</p>
                 </div>
                 <div className="text-right">
                   <p className="text-sm text-gray-700">5 hours ago</p>
