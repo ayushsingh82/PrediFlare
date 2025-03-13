@@ -1,16 +1,16 @@
-# PredictFLOW
+# PrediFlare
 
-PredictFLOW is an AI-powered prediction market on the telegram mini app built on the FLOW blockchain, leveraging Eliza AI and Polymarket data to enhance user experience and decision-making
+PrediFlare is an AI-powered prediction market on the telegram mini app built on the FLFlareOW blockchain, leveraging Eliza AI and Polymarket data to enhance user experience and decision-making
 
 ## Overview
 
-PredictFLOW allows users to make predictions and win rewards. With Eliza AI integrated, users can receive insights, analysis, and answers to their queries before making a prediction. The platform is designed for seamless interaction with an intuitive swipe-based interface.
+PrediFlare allows users to make predictions and win rewards. With Eliza AI integrated, users can receive insights, analysis, and answers to their queries before making a prediction. The platform is designed for seamless interaction with an intuitive swipe-based interface.
 
-FLOW explorer Link - https://evm-testnet.FLOWscan.io/address/0x37dD26d18abeC2d311e82177f9fa58E9DC14b579
+Flare explorer Link - https://coston2-explorer.flare.network/address/0x5d407Ad498d93F3a7988C16Ec63835d760f816D5
 
 ## Features
 
-- **Blockchain-Powered**: Built on the FLOW blockchain for secure and transparent transactions.
+- **Blockchain-Powered**: Built on the Flare blockchain for secure and transparent transactions.
 - **AI Assistance**: Eliza AI provides real-time insights and analysis to help users make informed predictions.
 - **Polymarket Data**: Utilizes Polymarket for accurate and up-to-date market data.
 - **Swipe to Predict**:
@@ -29,7 +29,7 @@ FLOW explorer Link - https://evm-testnet.FLOWscan.io/address/0x37dD26d18abeC2d31
 
 ## Tech Stack
 
-- **Blockchain**: FLOW
+- **Blockchain**: Flare
 - **AI**: Eliza AI
 - **Market Data**: Polymarket
 - **Frontend**: React (with Vite)
@@ -41,4 +41,4 @@ This project is licensed under the MIT License.
 
 ---
 
-Happy predicting with **PredictFLOW**! 🚀
+Happy predicting with **PrediFlare**! 🚀
