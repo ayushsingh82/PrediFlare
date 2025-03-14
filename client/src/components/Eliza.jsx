@@ -1,89 +1,76 @@
-import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { ConnectButton } from './ConnectButton'
-import { FaRobot, FaPaperPlane, FaChartLine, FaPlus, FaUser } from 'react-icons/fa'
-import { GoogleGenerativeAI } from "@google/generative-ai"
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { ConnectButton } from './ConnectButton';
+import { FaRobot, FaPaperPlane, FaChartLine, FaPlus, FaUser } from 'react-icons/fa';
 
 function Eliza() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [messages, setMessages] = useState([
-    { text: "Hi! I'm looking for help with predictions.", isBot: false }
-  ])
-  const [input, setInput] = useState('')
-  const [isLoading, setIsLoading] = useState(false)
+    { 
+      text: `Bitcoin breaking $150K depends on multiple factors, including:
 
-  // Initialize Gemini API
-  const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY)
-  const model = genAI.getGenerativeModel({ model: "gemini-pro" })
-
-  const handleSend = async (e) => {
-    e.preventDefault()
-    if (!input.trim() || isLoading) return
-
-    const userMessage = input
-    setMessages(prev => [...prev, { text: userMessage, isBot: false }])
-    setInput('')
-    setIsLoading(true)
-
-    try {
-      // Create a new chat instance
-      const chat = model.startChat({
-        generationConfig: {
-          maxOutputTokens: 150,
-          temperature: 0.7,
-        },
-      })
-
-      // Send the message with context
-      const prompt = `You are Eliza, a knowledgeable prediction market and cryptocurrency assistant. 
-                     Previous context: ${messages.map(m => m.text).join('\n')}
-                     User question: ${userMessage}
-                     Please provide a helpful response:`
-
-      const result = await chat.sendMessage([prompt])
-      const response = await result.response
-      const botResponse = response.text()
-
-      setMessages(prev => [...prev, { text: botResponse, isBot: true }])
-    } catch (error) {
-      console.error('Gemini API Error:', error)
-      setMessages(prev => [...prev, { 
-        text: "I apologize, but I'm experiencing a technical issue. Please try asking your question again.", 
-        isBot: true 
-      }])
-    } finally {
-      setIsLoading(false)
+Macroeconomic Conditions 🏦: Interest rates, inflation, and global liquidity.
+Spot Bitcoin ETFs 📈: Continued institutional adoption via ETFs.
+Halving Effect ⛏️: The next BTC halving in 2024 reducing supply.
+Regulatory Clarity ⚖️: Clearer policies can drive mainstream adoption.`,
+      isBot: true 
     }
-  }
+  ]);
+  const [input, setInput] = useState('');
+
+  const handleSend = (e) => {
+    e.preventDefault();
+    if (!input.trim()) return;
+
+    // Add user message
+    setMessages(prev => [...prev, { text: input, isBot: false }]);
+
+    // Clear input
+    setInput('');
+
+    // Fixed bot response after user message
+    setTimeout(() => {
+      setMessages(prev => [
+        ...prev,
+        {
+          text: `Bitcoin breaking $150K depends on multiple factors, including:
+
+Macroeconomic Conditions 🏦: Interest rates, inflation, and global liquidity.
+Spot Bitcoin ETFs 📈: Continued institutional adoption via ETFs.
+Halving Effect ⛏️: The next BTC halving in 2024 reducing supply.
+Regulatory Clarity ⚖️: Clearer policies can drive mainstream adoption.`,
+          isBot: true,
+        }
+      ]);
+    }, 500);
+  };
 
   return (
     <div className="min-h-screen bg-pink-200 flex flex-col items-center p-8">
       {/* Header */}
       <div className="w-full max-w-3xl mb-16">
         <div className="flex justify-between items-center mb-4">
-          <div className="flex items-center gap-4">
-            <h1 
-              onClick={() => navigate('/')}
-              className="text-3xl font-bold text-pink-600 cursor-pointer hover:text-pink-500 transition-colors"
-            >
-              PrediFlare
-            </h1>
-          </div>
+          <h1 
+            onClick={() => navigate('/')}
+            className="text-3xl font-bold text-pink-600 cursor-pointer hover:text-pink-500 transition-colors"
+          >
+            PrediFlare
+          </h1>
           <ConnectButton />
         </div>
         <div className="h-px bg-pink-800/60 w-full"></div>
       </div>
 
       {/* Chat Container */}
-      <div className="w-full max-w-xl mb-20 bg-pink-300 rounded-2xl border-2 border-pink-500 overFLOW-hidden">
+      <div className="w-full max-w-xl mb-20 bg-pink-300 rounded-2xl border-2 border-pink-500 overflow-hidden">
         {/* Chat Header */}
         <div className="bg-gradient-to-r from-pink-500 to-purple-500 p-4 flex items-center gap-3">
           <FaRobot className="text-white text-2xl" />
-          <h2 className="text-lg font-bold text-white">Eliza AI  powered by Polymarket</h2>
+          <h2 className="text-lg font-bold text-white">Eliza AI powered by Polymarket</h2>
         </div>
 
         {/* Messages */}
-        <div className="h-[400px] overFLOW-y-auto p-4 space-y-4">
+        <div className="h-[400px] overflow-y-auto p-4 space-y-4">
           {messages.map((msg, idx) => (
             <div
               key={idx}
@@ -100,13 +87,6 @@ function Eliza() {
               </div>
             </div>
           ))}
-          {isLoading && (
-            <div className="flex justify-start">
-              <div className="bg-white text-black rounded-2xl rounded-tl-none px-4 py-2">
-                Typing...
-              </div>
-            </div>
-          )}
         </div>
 
         {/* Input */}
@@ -118,14 +98,10 @@ function Eliza() {
               onChange={(e) => setInput(e.target.value)}
               placeholder="Type your message..."
               className="flex-1 px-4 py-2 rounded-xl border-2 border-pink-400 focus:outline-none focus:border-pink-500"
-              disabled={isLoading}
             />
             <button
               type="submit"
-              className={`bg-pink-500 text-white p-3 rounded-xl transition-colors ${
-                isLoading ? 'opacity-50 cursor-not-allowed' : 'hover:bg-pink-600'
-              }`}
-              disabled={isLoading}
+              className="bg-pink-500 text-white p-3 rounded-xl transition-colors hover:bg-pink-600"
             >
               <FaPaperPlane />
             </button>
@@ -159,7 +135,7 @@ function Eliza() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Eliza
+export default Eliza;
