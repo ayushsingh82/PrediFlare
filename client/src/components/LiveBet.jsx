@@ -14,7 +14,9 @@ function LiveBet() {
   const [showChat, setShowChat] = useState(false)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
-  const [messages, setMessages] = useState([])
+  const [messages, setMessages] = useState([
+    { text: "Hi! I'm looking for help with predictions.", isBot: false }
+  ])
   const [input, setInput] = useState('')
   const [isLoading, setIsLoading] = useState(false)
 
@@ -24,6 +26,10 @@ function LiveBet() {
   const yesOpacity = useTransform(x, [-200, 0, 100], [0, 0, 1])
   const noOpacity = useTransform(x, [-100, 0, 200], [1, 0, 0])
   const controls = useAnimation()
+
+  // Initialize Gemini API
+  const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY)
+  const model = genAI.getGenerativeModel({ model: "gemini-pro" })
 
   // Fetch questions from contract
   useEffect(() => {
@@ -83,32 +89,43 @@ function LiveBet() {
     navigate('/buy-bet')
   }
 
-  const handleSend = (e) => {
-    e.preventDefault();
-    if (!input.trim()) return;
+  const handleSend = async (e) => {
+    e.preventDefault()
+    if (!input.trim() || isLoading) return
 
-    // Add user message
-    setMessages(prev => [...prev, { text: input, isBot: false }]);
+    const userMessage = input
+    setMessages(prev => [...prev, { text: userMessage, isBot: false }])
+    setInput('')
+    setIsLoading(true)
 
-    // Clear input
-    setInput('');
+    try {
+      const chat = model.startChat({
+        generationConfig: {
+          maxOutputTokens: 150,
+          temperature: 0.7,
+        },
+      })
 
-    // Fixed bot response after user message
-    setTimeout(() => {
-      setMessages(prev => [
-        ...prev,
-        {
-          text: `Bitcoin breaking $150K depends on multiple factors, including:
+      const prompt = `You are Eliza, a knowledgeable prediction market and cryptocurrency assistant. 
+                     Previous context: ${messages.map(m => m.text).join('\n')}
+                     User question: ${userMessage}
+                     Please provide a helpful response:`
 
-Macroeconomic Conditions 🏦: Interest rates, inflation, and global liquidity.
-Spot Bitcoin ETFs 📈: Continued institutional adoption via ETFs.
-Halving Effect ⛏️: The next BTC halving in 2024 reducing supply.
-Regulatory Clarity ⚖️: Clearer policies can drive mainstream adoption.`,
-          isBot: true,
-        }
-      ]);
-    }, 500);
-  };
+      const result = await chat.sendMessage([prompt])
+      const response = await result.response
+      const botResponse = response.text()
+
+      setMessages(prev => [...prev, { text: botResponse, isBot: true }])
+    } catch (error) {
+      console.error('Gemini API Error:', error)
+      setMessages(prev => [...prev, { 
+        text: "I apologize, but I'm experiencing a technical issue. Please try asking your question again.", 
+        isBot: true 
+      }])
+    } finally {
+      setIsLoading(false)
+    }
+  }
 
   const handleElizaClick = () => {
     console.log('Opening chat...')
